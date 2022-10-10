@@ -11,11 +11,9 @@ function App() {
   const [search, setSearch] = useState("Cochin");
   const [data, setData] = useState([]);
   const [input, setInput] = useState("");
-  const [component, setComponent] = useState(true);
 
   useEffect(() => {
     const getWeather = async () => {
-      if (component) {
         await axios
           .get(`${api.url}weather?q=${search}&units=metric&appid=${api.key}`)
           .then((Response) => {
@@ -23,12 +21,9 @@ function App() {
             setInput("");
           });
       }
-      return () => {
-        setComponent(false);
-      };
     };
     getWeather();
-  }, [search, component]);
+  }, [search]);
 
   let emoji = null;
   if (typeof data.main !== "undefined") {
