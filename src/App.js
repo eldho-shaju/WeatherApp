@@ -14,12 +14,15 @@ function App() {
 
   useEffect(() => {
     const getWeather = async () => {
-        await axios
-          .get(`${api.url}weather?q=${search}&units=metric&appid=${api.key}`)
-          .then((Response) => {
-            setData(Response.data);
-            setInput("");
-          });
+      try{
+      await axios
+        .get(`${api.url}weather?q=${search}&units=metric&appid=${api.key}`)
+        .then((Response) => {
+          setData(Response.data);
+          setInput("");
+        });
+      } catch(err) {
+        alert("Enter city name");
       }
     };
     getWeather();
